@@ -41,7 +41,7 @@ function AccessoriesDetailsPage() {
   useEffect(() => {
     async function fetchAll() {
       try {
-        const res = await fetch(`http://localhost:5000/api/accessories/${id}`);
+  const res = await fetch(`https://mobile-server-1.onrender.com/api/accessories/${id}`);
         const data = await res.json();
         setAccessory(data);
         setMainImage(data?.images ? data.images[0] : data?.image);
@@ -114,7 +114,7 @@ function AccessoriesDetailsPage() {
       }
       // Use user.email as the unique user identifier for backend
       const userField = user?.email || user?.name || 'User';
-      await fetch(`http://localhost:5000/api/accessories/${id}/reviews`, {
+  await fetch(`https://mobile-server-1.onrender.com/api/accessories/${id}/reviews`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${user?.token}` },
         body: JSON.stringify({ user: userField, value: userRating, review: userReview, avatar })
@@ -123,7 +123,7 @@ function AccessoriesDetailsPage() {
       setUserReview("");
       setTimeout(() => setShowToast(false), 3000);
       // Refetch accessory to update rating and reviews
-      const res = await fetch(`http://localhost:5000/api/accessories/${id}`);
+  const res = await fetch(`https://mobile-server-1.onrender.com/api/accessories/${id}`);
       const data = await res.json();
       setAccessory(data);
       setRatingCount(data.ratingCount || 0);

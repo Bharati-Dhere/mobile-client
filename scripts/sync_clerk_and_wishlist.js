@@ -6,7 +6,7 @@ const User = require('../backend/models/User');
 const Product = require('../backend/models/Product');
 const Accessory = require('../backend/models/Accessory');
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/mobile-store';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://mobile-server-1.onrender.com:27017/mobile-store';
 
 async function main() {
   const [,, clerkId, email, name, productId, model] = process.argv;

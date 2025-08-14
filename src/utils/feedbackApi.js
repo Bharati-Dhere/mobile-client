@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://mobile-server-1.onrender.com/api';
 
 export const fetchFeedback = async () => {
   const res = await axios.get(`${API_BASE}/feedback`, { withCredentials: true });
