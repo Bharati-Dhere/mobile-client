@@ -3,10 +3,10 @@ import axios from 'axios';
 // Remove from cart (single product or accessory)
 
 // Use environment variable for API base, fallback to localhost in development
-const API_BASE = process.env.REACT_APP_API_BASE ||
-  (window.location.hostname === 'localhost'
-    ? 'http://localhost:5000/api'
-    : 'https://mobile-server-1.onrender.com/api');
+// Always use Render backend in production, localhost in development
+const API_BASE = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000/api'
+  : 'https://mobile-server-1.onrender.com/api';
 // model should be 'Product' or 'Accessory'
 export const removeFromCart = async (productId, userToken, model) => {
   if (!model) throw new Error('Model type (Product or Accessory) is required for cart actions');
