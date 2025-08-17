@@ -1,6 +1,12 @@
 
 import axios from 'axios';
 // Remove from cart (single product or accessory)
+
+// Use environment variable for API base, fallback to localhost in development
+const API_BASE = process.env.REACT_APP_API_BASE ||
+  (window.location.hostname === 'localhost'
+    ? 'http://localhost:5000/api'
+    : 'https://mobile-server-1.onrender.com/api');
 // model should be 'Product' or 'Accessory'
 export const removeFromCart = async (productId, userToken, model) => {
   if (!model) throw new Error('Model type (Product or Accessory) is required for cart actions');
@@ -26,9 +32,6 @@ export const updateOrderStatus = async (orderId, { status, deliveryDate }) => {
   return res.data;
 };
 
-
-
-const API_BASE = 'https://mobile-server-1.onrender.com/api';
 
 // Fetch latest best sellers
 export const fetchLatestBestSellers = async () => {
@@ -88,8 +91,17 @@ export const signup = async (userData) => {
 };
 
 export const login = async (credentials) => {
-  const res = await axios.post(`${API_BASE}/auth/login`, credentials, { withCredentials: true });
-  return res.data;
+  try {
+    const res = await axios.post(`${API_BASE}/auth/login`, credentials, { withCredentials: true });
+    return res.data;
+  } catch (err) {
+    // If backend returns no response or invalid JSON, return a consistent error object
+    if (err.response && err.response.data) {
+      return err.response.data;
+    } else {
+      return { success: false, message: 'Login failed. No response from server.' };
+    }
+  }
 };
 
 export const logout = async () => {
