@@ -85,7 +85,9 @@ export default function AuthModal({ onClose, role }) {
         return;
       }
       // Use backend login for all users
-      const res = await fetch("/api/auth/login", {
+      // Use API_BASE for backend URL
+      const { API_BASE } = require('../utils/api');
+      const res = await fetch(`${API_BASE}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

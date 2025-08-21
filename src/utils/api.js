@@ -4,6 +4,7 @@ import axios from 'axios';
 
 // Use environment variable for API base, fallback to localhost in development
 // Always use Render backend in production, localhost in development
+// Always use Render backend in production, localhost in development
 const API_BASE = window.location.hostname === 'localhost'
   ? 'http://localhost:5000/api'
   : 'https://mobile-server-1.onrender.com/api';

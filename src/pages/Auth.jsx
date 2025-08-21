@@ -17,7 +17,9 @@ const Auth = () => {
     e.preventDefault();
     setMessage('');
     // User login: send role 'user' to backend
-    fetch('/api/auth/login', {
+    // Use API_BASE for backend URL
+    const { API_BASE } = require('../utils/api');
+    fetch(`${API_BASE}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
